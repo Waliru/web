@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waliru Control Plane | Runtime Configuration Governance</title>
+    
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Design Tokens -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#022E5C',   // Primary Navy
+                        secondary: '#124EAA', // Secondary Blue
+                        accent: '#4194BA',    // Accent Teal
+                        dark: '#05182E',      // Dark Base
+                        light: '#F5F7FA',     // Light BG
+                        surface: '#FFFFFF',
+                        border: '#E2E8F0',
+                        code: '#0d1117',      // Code block bg
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(2, 46, 92, 0.08)',
+                        'card': '0 2px 8px -2px rgba(2, 46, 92, 0.05)',
+                    },
+                    animation: {
+                        'flow': 'flowDash 2s linear infinite',
+                    },
+                    keyframes: {
+                        flowDash: {
+                            '0%': { strokeDashoffset: '24' },
+                            '100%': { strokeDashoffset: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
+            color: #05182E;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Pattern */
+        .hero-pattern {
+            background-color: #022E5C;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Diagram Animations */
+        .path-flow {
+            stroke-dasharray: 8;
+            animation: flowDash 30s linear infinite;
+        }
+        
+        /* Mega Menu */
+        .group:hover .mega-menu, .mega-menu:focus-within {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 1. NAVBAR (Consistent with Index) -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="bg-primary text-white p-1.5 rounded font-bold text-xl tracking-tighter">WT</div>
+                <span class="text-primary font-bold text-lg tracking-tight group-hover:text-secondary transition-colors">Waliru Tech</span>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="/es/index.html#soluciones" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Soluciones</a>
+                <a href="/es/products.html" class="text-sm font-bold text-primary transition-colors">Productos</a>
+                <a href="/es/index.html#clientes" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Clientes</a>
+                <div class="group relative h-20 flex items-center">
+                    <button class="flex items-center gap-1 text-sm font-medium text-gray-600 group-hover:text-primary transition-colors focus:outline-none">
+                        Recursos <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <!-- Mega Menu Content (Simplified for brevity) -->
+                    <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white border border-border shadow-soft rounded-lg p-6 opacity-0 invisible -translate-y-2 transition-all duration-200 ease-out z-50">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="space-y-4"><h6 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2">Aprender</h6><a href="#" class="block text-sm text-gray-600 hover:text-primary">Guías Técnicas</a></div>
+                            <div class="space-y-4"><h6 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2">Plantillas</h6><a href="#" class="block text-sm text-gray-600 hover:text-primary">Checklists</a></div>
+                            <div class="space-y-4"><h6 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2">Al día</h6><a href="#" class="block text-sm text-gray-600 hover:text-primary">Blog</a></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/es/index.html#empresa" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Empresa</a>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-4">
+                 <div class="flex items-center text-xs font-semibold border-r border-gray-200 pr-4">
+                    <span class="text-primary cursor-default">ES</span>
+                    <span class="mx-1 text-gray-300">|</span>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">EN</a>
+                </div>
+                <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20Control%20Plane" class="inline-flex items-center justify-center px-5 py-2.5 bg-primary hover:bg-secondary text-white text-sm font-semibold rounded transition-colors duration-200 shadow-sm">
+                    Solicitar demo
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO PRODUCTO -->
+    <section class="relative hero-pattern text-white pt-20 pb-28">
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 text-xs text-blue-200 mb-8 font-mono">
+                <span class="opacity-50">PRODUCTS</span>
+                <span>/</span>
+                <span class="text-accent">Waliru Control Plane</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4">
+                        Gobierna el runtime de tus aplicaciones <span class="text-accent">sin tocar código</span>.
+                    </h1>
+                    <p class="text-xs md:text-sm text-blue-200/90 tracking-wide uppercase mb-4">Operational Data Catalog for Runtime Applications</p>
+                    <p class="text-lg text-blue-100 font-light leading-relaxed mb-8">
+                        Centraliza catálogos, configuraciones y metadata operativa con versionado, aprobación y promoción segura entre entornos. 
+                        <br><br>
+                        <span class="font-medium text-white">Todo data-only. Todo controlado. Todo a escala enterprise.</span>
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20Control%20Plane" class="px-6 py-3.5 bg-accent hover:bg-[#347da0] text-white font-semibold rounded transition-all shadow-lg hover:shadow-accent/20 text-center">
+                            Solicitar demo
+                        </a>
+                        <a href="#como-funciona" class="px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-medium rounded transition-all text-center">
+                            Ver cómo funciona
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual: Code/Config Abstract -->
+                <div class="bg-dark border border-white/10 rounded-lg p-6 shadow-2xl relative overflow-hidden hidden lg:block">
+                    <div class="absolute top-0 left-0 w-full h-8 bg-white/5 border-b border-white/5 flex items-center px-4 gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        <span class="ml-4 text-xs font-mono text-gray-500">config-prod-v2.4.json</span>
+                    </div>
+                    <div class="mt-6 font-mono text-xs md:text-sm text-gray-300 space-y-2">
+                        <div class="flex gap-4"><span class="text-gray-600">01</span> <span>{</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">02</span> <span class="pl-4"><span class="text-accent">"artifact_type"</span>: "runtime-parameters",</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">03</span> <span class="pl-4"><span class="text-accent">"environment"</span>: "prod",</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">04</span> <span class="pl-4"><span class="text-accent">"version"</span>: "v2.4",</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">05</span> <span class="pl-4"><span class="text-accent">"values"</span>: {</span></div>
+                        <div class="flex gap-4 bg-accent/10 -mx-6 px-6 border-l-2 border-accent"><span class="text-gray-500">06</span> <span class="pl-8">"max_transfer_amount": 5000000,</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">07</span> <span class="pl-8">"default_currency": "COP",</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">08</span> <span class="pl-8">"checkout_timeout_ms": 9000</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">09</span> <span class="pl-4">},</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">10</span> <span class="pl-4"><span class="text-accent">"ui_structure"</span>: {</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">11</span> <span class="pl-8">"form": [</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">12</span> <span class="pl-12">{ "field": "limit_reason", "type": "select", "options": ["FRAUD", "MANUAL", "POLICY"] },</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">13</span> <span class="pl-12">{ "field": "notes", "type": "textarea", "maxLength": 280 }</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">14</span> <span class="pl-8">]</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">15</span> <span class="pl-4">},</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">16</span> <span class="pl-4"><span class="text-accent">"content_text"</span>: {</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">17</span> <span class="pl-8">"checkout_banner": "Todas las transacciones son monitoreadas en tiempo real."</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">18</span> <span class="pl-4">}</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">19</span> <span>}</span></div>
+                    </div>
+                    <!-- Badge Overlay -->
+                    <div class="absolute bottom-6 right-6 px-3 py-1 bg-green-900/40 border border-green-500/30 rounded text-green-400 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                        ● Published to Prod
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. EL PROBLEMA -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">El caos oculto del runtime</h2>
+                <p class="text-gray-600 text-lg">
+                    En la mayoría de organizaciones, la gestión de datos operativos es un punto ciego que mezcla responsabilidades.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-light rounded-lg border border-gray-100">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="git-merge" class="w-5 h-5 text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-lg mb-2">Dependencia de Deploys</h3>
+                    <p class="text-sm text-gray-600">Cambiar un texto legal o un límite de transacción requiere un ciclo completo de CI/CD, bloqueando al equipo.</p>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-lg mb-2">Contaminación de Entornos</h3>
+                    <p class="text-sm text-gray-600">Datos de prueba se filtran a producción. No hay una "fuente de la verdad" clara para cada ambiente.</p>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="file-warning" class="w-5 h-5 text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-lg mb-2">Sin Gobernanza</h3>
+                    <p class="text-sm text-gray-600">Archivos Excel volando por email, scripts SQL manuales y JSONs sin dueño claro en repositorios Git.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center p-4 bg-blue-50 border border-blue-100 rounded-lg max-w-2xl mx-auto">
+                <p class="text-primary font-medium">"Esto no es un problema de desarrollo. Es un problema de control del runtime."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SOLUCIÓN & QUÉ GESTIONA -->
+    <section class="py-20 bg-light border-y border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-accent font-bold tracking-wider uppercase text-xs">La Solución</span>
+                    <h2 class="text-3xl font-bold text-primary mt-2 mb-6">Un verdadero Control Plane</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Waliru Control Plane actúa como la capa de control que define qué datos y configuraciones están activos en producción, y los publica de forma segura para consumo en runtime.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Define y versiona</strong> datos operativos con inmutabilidad.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Promueve configuraciones</strong> entre Dev → QA → Prod.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <span class="text-sm text-gray-700"><strong>Publica solo versiones consistentes</strong> (Publicación atómica).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature Grid -->
+                <div class="bg-white p-8 rounded-xl shadow-card border border-gray-100">
+                    <h3 class="text-lg font-bold text-primary mb-6 border-b border-gray-100 pb-4">¿Qué gestiona exactamente?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="list" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Catálogos y Listas</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Enums, taxonomías de productos, listas de países, códigos de error.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="type" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Textos y Copys</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Labels, mensajes de error, textos legales, tooltips gestionables.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="layout" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Metadata UI</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">JSON declarativo para renderizado dinámico de formularios o menús.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="sliders" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Parámetros</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Umbrales, límites de negocio, valores por defecto, timeouts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CÓMO FUNCIONA (DIAGRAMA) -->
+    <section id="como-funciona" class="py-24 bg-dark relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 text-white">
+                <h2 class="text-3xl font-bold mb-4">Modelo de Operación</h2>
+                <p class="text-gray-400">Separación estricta entre definición (Control) y consumo (Data Plane).</p>
+            </div>
+
+            <!-- SVG Diagram -->
+            <div class="max-w-4xl mx-auto bg-white/5 rounded-xl border border-white/10 p-8 md:p-12">
+                <svg width="100%" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Zone Labels -->
+                    <text x="50" y="30" fill="#4194BA" font-family="Inter" font-weight="bold" font-size="14" letter-spacing="1">CONTROL PLANE (Gestión)</text>
+                    <text x="50" y="240" fill="#124EAA" font-family="Inter" font-weight="bold" font-size="14" letter-spacing="1">DATA PLANE (Runtime)</text>
+
+                    <!-- Divider -->
+                    <line x1="0" y1="200" x2="800" y2="200" stroke="#334155" stroke-width="1" stroke-dasharray="4 4" />
+
+                    <!-- Control Plane Flow -->
+                    <!-- Step 1: Definition -->
+                    <g transform="translate(50, 60)">
+                        <rect width="120" height="80" rx="8" fill="#05182E" stroke="#4194BA" stroke-width="2"/>
+                        <text x="60" y="35" fill="white" font-family="Inter" font-size="12" text-anchor="middle" font-weight="bold">Definición</text>
+                        <text x="60" y="55" fill="#94a3b8" font-family="Inter" font-size="10" text-anchor="middle">JSON / Schema</text>
+                    </g>
+
+                    <!-- Arrow 1 -->
+                    <path d="M180 100 H230" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Step 2: Approval -->
+                    <g transform="translate(240, 60)">
+                        <rect width="120" height="80" rx="8" fill="#05182E" stroke="#475569" stroke-width="2"/>
+                        <text x="60" y="35" fill="white" font-family="Inter" font-size="12" text-anchor="middle" font-weight="bold">Aprobación</text>
+                        <text x="60" y="55" fill="#94a3b8" font-family="Inter" font-size="10" text-anchor="middle">Audit Log</text>
+                    </g>
+
+                    <!-- Arrow 2 -->
+                    <path d="M370 100 H420" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <!-- Step 3: Promotion -->
+                    <g transform="translate(430, 60)">
+                        <rect width="120" height="80" rx="8" fill="#05182E" stroke="#EAB308" stroke-width="2"/>
+                        <text x="60" y="35" fill="white" font-family="Inter" font-size="12" text-anchor="middle" font-weight="bold">Promoción</text>
+                        <text x="60" y="55" fill="#94a3b8" font-family="Inter" font-size="10" text-anchor="middle">Dev → Prod</text>
+                    </g>
+
+                    <!-- Vertical Flow (Publish) -->
+                    <path d="M490 140 V 240" stroke="#4194BA" stroke-width="2" stroke-dasharray="8 8" class="path-flow"/>
+                    <circle cx="490" cy="200" r="4" fill="#4194BA" />
+
+                    <!-- Data Plane Flow -->
+                    <!-- Runtime API -->
+                    <g transform="translate(430, 260)">
+                        <rect width="120" height="80" rx="8" fill="#1e293b" stroke="#124EAA" stroke-width="2"/>
+                        <text x="60" y="35" fill="white" font-family="Inter" font-size="12" text-anchor="middle" font-weight="bold">Runtime API</text>
+                        <text x="60" y="55" fill="#94a3b8" font-family="Inter" font-size="10" text-anchor="middle">Read-Only Cache</text>
+                    </g>
+                    
+                    <!-- Arrow to Apps -->
+                    <path d="M560 300 H 630" stroke="#4194BA" stroke-width="2" class="path-flow" marker-end="url(#arrowhead-blue)"/>
+
+                    <!-- Applications -->
+                    <g transform="translate(640, 250)">
+                        <rect width="100" height="100" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+                        <text x="50" y="45" fill="white" font-family="Inter" font-size="12" text-anchor="middle" font-weight="bold">Client Apps</text>
+                        <text x="50" y="65" fill="#94a3b8" font-family="Inter" font-size="10" text-anchor="middle">No logic</text>
+                    </g>
+
+                    <!-- Markers -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
+                        </marker>
+                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#4194BA" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <p class="text-center text-xs text-gray-400 mt-6 max-w-2xl mx-auto">La versión activa se resuelve al publicar. El runtime solo consume datos cacheados en lectura.</p>
+        </div>
+    </section>
+
+    <!-- 6. CAPABILITIES & NOT -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <!-- Capabilities -->
+            <div>
+                <h3 class="text-2xl font-bold text-primary mb-6">Capacidades Enterprise</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3 p-3 rounded bg-light border border-transparent hover:border-accent/30 transition-colors">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-green-600"></i>
+                        <span class="text-sm text-gray-700 font-medium">Versionado inmutable y rollback seguro</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded bg-light border border-transparent hover:border-accent/30 transition-colors">
+                        <i data-lucide="layers" class="w-5 h-5 text-accent"></i>
+                        <span class="text-sm text-gray-700 font-medium">Dev / QA / Prod como first-class citizens</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded bg-light border border-transparent hover:border-accent/30 transition-colors">
+                        <i data-lucide="git-pull-request" class="w-5 h-5 text-secondary"></i>
+                        <span class="text-sm text-gray-700 font-medium">Promoción inteligente (detecta dependencias)</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded bg-light border border-transparent hover:border-accent/30 transition-colors">
+                        <i data-lucide="history" class="w-5 h-5 text-gray-600"></i>
+                        <span class="text-sm text-gray-700 font-medium">Auditoría completa y trazabilidad (Who/When)</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded bg-light border border-transparent hover:border-accent/30 transition-colors">
+                        <i data-lucide="zap" class="w-5 h-5 text-yellow-600"></i>
+                        <span class="text-sm text-gray-700 font-medium">Runtime API cacheable y O(1)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- What it is NOT -->
+            <div class="bg-gray-50 p-8 rounded-xl border border-gray-100">
+                <h3 class="text-lg font-bold text-dark mb-6">Lo que NO es (y por qué importa)</h3>
+                <p class="text-sm text-gray-600 mb-6">
+                    Waliru Control Plane no intenta hacerlo todo. Mantiene el sistema simple, predecible y escalable evitando complejidades innecesarias.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex gap-3">
+                        <i data-lucide="x-circle" class="w-5 h-5 text-red-500 shrink-0"></i>
+                        <div>
+                            <span class="font-bold text-sm text-dark">No es MDM</span>
+                            <p class="text-xs text-gray-500">Sin ETLs complejos ni búsqueda de "golden record".</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <i data-lucide="x-circle" class="w-5 h-5 text-red-500 shrink-0"></i>
+                        <div>
+                            <span class="font-bold text-sm text-dark">No es CMS</span>
+                            <p class="text-xs text-gray-500">Sin gestión de media ni edición visual (WYSIWYG).</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <i data-lucide="x-circle" class="w-5 h-5 text-red-500 shrink-0"></i>
+                        <div>
+                            <span class="font-bold text-sm text-dark">No es Feature Flags</span>
+                            <p class="text-xs text-gray-500">No decide ejecución lógica, solo provee datos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. VALOR POR ROL -->
+    <section class="py-20 bg-light border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <h2 class="text-2xl font-bold text-primary mb-12 text-center">Valor para la organización</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- CTO -->
+                <div class="bg-white p-6 rounded shadow-sm border-t-4 border-primary">
+                    <h4 class="font-bold text-dark mb-3">CTO / Arquitectura</h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Control del runtime sin tocar código.</li>
+                        <li>• Separación clara Control vs Data Plane.</li>
+                        <li>• Menos riesgo operativo en producción.</li>
+                    </ul>
+                </div>
+                <!-- DevOps -->
+                <div class="bg-white p-6 rounded shadow-sm border-t-4 border-secondary">
+                    <h4 class="font-bold text-dark mb-3">DevOps / Plataforma</h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Flujo Dev → QA → Prod limpio.</li>
+                        <li>• Menos hotfixes de configuración.</li>
+                        <li>• Performance protegida por caché.</li>
+                    </ul>
+                </div>
+                <!-- Product -->
+                <div class="bg-white p-6 rounded shadow-sm border-t-4 border-accent">
+                    <h4 class="font-bold text-dark mb-3">Producto / UX</h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Cambios rápidos y controlados.</li>
+                        <li>• Textos y estructuras sin deploy.</li>
+                        <li>• Menos dependencia de releases de IT.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CTA FINAL -->
+    <section id="demo" class="bg-primary py-24 text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-white mb-6">¿Listo para sacar la configuración del código?</h2>
+            <p class="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
+                Recupere el control de su runtime con una arquitectura diseñada para la escala y la seguridad.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20Control%20Plane" class="px-8 py-4 bg-white text-primary font-bold rounded shadow-lg hover:bg-gray-100 transition-colors">
+                    Solicitar demo
+                </a>
+                <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20Control%20Plane" class="px-8 py-4 bg-transparent border border-white/30 text-white font-bold rounded hover:bg-white/10 transition-colors">
+                    Hablar con arquitectura
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER (Consistent) -->
+    <footer class="bg-dark pt-16 pb-8 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                <span>© 2025 Waliru Tech</span>
+                <div class="flex gap-6">
+                    <a href="/es/index.html" class="hover:text-white">Home</a>
+                    <a href="#" class="hover:text-white">Privacidad</a>
+                    <a href="#" class="hover:text-white">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
