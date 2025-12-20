@@ -1,0 +1,29 @@
+﻿{
+  "empresa": {
+    "title": "Senior, boutique team with flexible execution.",
+    "subtitle": "We design, build, and operate critical systems with a strong technical leadership core and an on-demand network of specialists.",
+    "cards": [
+      {
+        "title": "Real technical leadership",
+        "body": "Architecture, decisions, and quality led by experience. No outsourcing what matters."
+      },
+      {
+        "title": "Specialist network",
+        "body": "We add the right talent when needed: UX, QA, DevOps, Data—aligned through shared standards."
+      },
+      {
+        "title": "Delivery with standards",
+        "body": "Clear scope, reviews, baseline security, and full ownership of outcomes."
+      }
+    ],
+    "principles": [
+      "Less talk, more evidence",
+      "Design before build",
+      "Observability and security from day one",
+      "Documented decisions (ADRs)",
+      "Incremental delivery with control"
+    ],
+    "ctaText": "Need a serious technical partner?",
+    "ctaLabel": "Book a diagnostic call"
+  }
+}

@@ -1,0 +1,29 @@
+﻿{
+  "empresa": {
+    "title": "Somos un equipo senior, boutique y con ejecución flexible.",
+    "subtitle": "Diseñamos, construimos y operamos soluciones críticas con un núcleo de liderazgo técnico y una red de especialistas por proyecto.",
+    "cards": [
+      {
+        "title": "Liderazgo técnico real",
+        "body": "Arquitectura, decisiones y calidad guiadas por experiencia. Sin delegar lo importante."
+      },
+      {
+        "title": "Red de especialistas",
+        "body": "Sumamos talento por necesidad: UX, QA, DevOps, Data. Integrados con estándares y seguimiento."
+      },
+      {
+        "title": "Entrega con estándares",
+        "body": "Definición clara de alcance, revisiones, seguridad básica y ownership extremo por resultado."
+      }
+    ],
+    "principles": [
+      "Menos promesas, más evidencia",
+      "Diseñar antes de construir",
+      "Observabilidad y seguridad desde el inicio",
+      "Decisiones documentadas (ADRs)",
+      "Entrega incremental con control"
+    ],
+    "ctaText": "¿Necesitas un partner técnico serio?",
+    "ctaLabel": "Agendar diagnóstico"
+  }
+}

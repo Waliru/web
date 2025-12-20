@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waliru LLM Firewall | AI Gateway & LLM Security Proxy</title>
+    <meta name="description" content="Waliru LLM Firewall centraliza políticas, costos, proveedores y auditoría del uso corporativo de LLMs sin frenar al equipo.">
+    
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Design Tokens -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#022E5C',   // Primary Navy
+                        secondary: '#124EAA', // Secondary Blue
+                        accent: '#4194BA',    // Accent Teal
+                        dark: '#05182E',      // Dark Base
+                        light: '#F5F7FA',     // Light BG
+                        surface: '#FFFFFF',
+                        border: '#E2E8F0',
+                        code: '#0d1117',      // Code block bg
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(2, 46, 92, 0.08)',
+                        'card': '0 2px 8px -2px rgba(2, 46, 92, 0.05)',
+                    },
+                    animation: {
+                        'flow': 'flowDash 2s linear infinite',
+                    },
+                    keyframes: {
+                        flowDash: {
+                            '0%': { strokeDashoffset: '24' },
+                            '100%': { strokeDashoffset: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
+            color: #05182E;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Pattern */
+        .hero-pattern {
+            background-color: #022E5C;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Diagram Animations */
+        .path-flow {
+            stroke-dasharray: 8;
+            animation: flowDash 30s linear infinite;
+        }
+        
+        /* Mega Menu */
+        .group:hover .mega-menu, .mega-menu:focus-within {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 1. NAVBAR (Consistent with Index) -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="bg-primary text-white p-1.5 rounded font-bold text-xl tracking-tighter">WT</div>
+                <span class="text-primary font-bold text-lg tracking-tight group-hover:text-secondary transition-colors">Waliru Tech</span>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="/es/index.html#soluciones" class="text-sm font-bold text-primary transition-colors">Soluciones</a>
+                <a href="/es/products.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Productos</a>
+                <a href="/es/index.html#clientes" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Clientes</a>
+                <div class="group relative h-20 flex items-center">
+                    <button class="flex items-center gap-1 text-sm font-medium text-gray-600 group-hover:text-primary transition-colors focus:outline-none">
+                        Recursos <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <!-- Mega Menu Content (Simplified for brevity) -->
+                    <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white border border-border shadow-soft rounded-lg p-6 opacity-0 invisible -translate-y-2 transition-all duration-200 ease-out z-50">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="space-y-4"><h6 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2">Aprender</h6><a href="#" class="block text-sm text-gray-600 hover:text-primary">Guías Técnicas</a></div>
+                            <div class="space-y-4"><h6 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2">Plantillas</h6><a href="#" class="block text-sm text-gray-600 hover:text-primary">Checklists</a></div>
+                            <div class="space-y-4"><h6 class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2">Al día</h6><a href="#" class="block text-sm text-gray-600 hover:text-primary">Blog</a></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/es/index.html#empresa" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Empresa</a>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-4">
+                 <div class="flex items-center text-xs font-semibold border-r border-gray-200 pr-4">
+                    <span class="text-primary cursor-default">ES</span>
+                    <span class="mx-1 text-gray-300">|</span>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">EN</a>
+                </div>
+                <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20LLM%20Firewall" class="inline-flex items-center justify-center px-5 py-2.5 bg-primary hover:bg-secondary text-white text-sm font-semibold rounded transition-colors duration-200 shadow-sm">
+                    Solicitar demo
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO PRODUCTO -->
+    <section class="relative hero-pattern text-white pt-20 pb-28">
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 text-xs text-blue-200 mb-8 font-mono">
+                <span class="opacity-50">PRODUCTS</span>
+                <span>/</span>
+                <span class="text-accent">Waliru LLM Firewall</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-4">
+                        Controla el uso de LLMs en tu empresa sin frenar al equipo.
+                    </h1>
+                    <p class="text-base md:text-lg text-blue-100/90 leading-relaxed mb-6">
+                        Firewall para prompts y respuestas: políticas, costos, proveedores y auditoría en un solo punto.
+                    </p>
+                    <p class="text-lg text-blue-100 font-light leading-relaxed mb-8">
+                        Waliru Guard inspecciona cada prompt y respuesta para aplicar políticas corporativas, rutar proveedores y mantener la trazabilidad completa sin bloquear la adopción de IA generativa.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="shield" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <p class="text-sm text-blue-100">Policy Engine: allow / block / redirect por equipo y app.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="wallet" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <p class="text-sm text-blue-100">Usage & Cost Control: cuotas, límites por proveedor y alertas.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="repeat" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <p class="text-sm text-blue-100">Provider Abstraction: switch, fallback local y shadow mode.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20LLM%20Firewall" class="px-6 py-3.5 bg-accent hover:bg-[#347da0] text-white font-semibold rounded transition-all shadow-lg hover:shadow-accent/20 text-center">
+                            Solicitar demo
+                        </a>
+                        <a href="#como-funciona" class="px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-medium rounded transition-all text-center">
+                            Ver cómo funciona
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual: Policy Snapshot -->
+                <div class="bg-dark border border-white/10 rounded-lg p-6 shadow-2xl relative overflow-hidden hidden lg:block">
+                    <div class="absolute top-0 left-0 w-full h-8 bg-white/5 border-b border-white/5 flex items-center px-4 gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        <span class="ml-4 text-xs font-mono text-gray-500">guard-policy-v1.yaml</span>
+                    </div>
+                    <div class="mt-6 font-mono text-xs md:text-sm text-gray-300 space-y-2">
+                        <div class="flex gap-4"><span class="text-gray-600">01</span> <span>{</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">02</span> <span class="pl-4"><span class="text-accent">"team"</span>: "Customer Success",</span></div>
+                        <div class="flex gap-4 bg-accent/10 -mx-6 px-6 border-l-2 border-accent"><span class="text-gray-500">03</span> <span class="pl-4"><span class="text-accent">"policy_engine"</span>: { "action": "redirect", "target": "local-guard" },</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">04</span> <span class="pl-4"><span class="text-accent">"prompt_checks"</span>: [</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">05</span> <span class="pl-8">{ "rule": "pii", "decision": "block" },</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">06</span> <span class="pl-8">{ "rule": "secret-scan", "decision": "block" },</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">07</span> <span class="pl-8">{ "rule": "shadow", "decision": "compare-openai" }</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">08</span> <span class="pl-4">],</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">09</span> <span class="pl-4"><span class="text-accent">"budget"</span>: { "monthly_usd": 1800, "alert": "80%" },</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">10</span> <span class="pl-4"><span class="text-accent">"providers"</span>: ["openai-gpt4o", "anthropic-sonnet", "waliru-local"],</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">11</span> <span class="pl-4"><span class="text-accent">"audit"</span>: true</span></div>
+                        <div class="flex gap-4"><span class="text-gray-600">12</span> <span>}</span></div>
+                    </div>
+                    <!-- Badge Overlay -->
+                    <div class="absolute bottom-6 right-6 px-3 py-1 bg-green-900/40 border border-green-500/30 rounded text-green-400 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                        Guard Active &#10003;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. EL PROBLEMA -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">El problema</h2>
+                <p class="text-gray-600 text-lg">
+                    Cada equipo conecta LLMs por su cuenta, sin políticas compartidas ni control financiero; el riesgo legal y el costo explotan en silencio.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-light rounded-lg border border-gray-100">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-5 h-5 text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-lg mb-2">Uso cada quien por su lado</h3>
+                    <p class="text-sm text-gray-600">Cada app inventa su integración y no hay forma central de saber qué prompts o datos pasan por los modelos.</p>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-lg mb-2">Riesgo de fuga de datos</h3>
+                    <p class="text-sm text-gray-600">PII, secretos y adjuntos sensibles salen sin inspección ni anonimización previa.</p>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="wallet" class="w-5 h-5 text-red-500"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-lg mb-2">Costo impredecible</h3>
+                    <p class="text-sm text-gray-600">No hay cuotas ni límites por proveedor, las alertas llegan tarde y el presupuesto se quema sin visibilidad.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center p-4 bg-blue-50 border border-blue-100 rounded-lg max-w-2xl mx-auto">
+                <p class="text-primary font-medium">"El mayor riesgo no es el modelo, es la falta de políticas compartidas para usarlo."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. QUÉ HACE WALIRU LLM FIREWALL -->
+    <section class="py-20 bg-light border-y border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-accent font-bold tracking-wider uppercase text-xs">Waliru LLM Firewall</span>
+                    <h2 class="text-3xl font-bold text-primary mt-2 mb-6">Qué hace Waliru LLM Firewall</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Centraliza la política de prompts y respuestas para que cada integración corporativa pase por Waliru Guard, sin reescribir tus aplicaciones ni frenar la adopción de IA.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <span class="text-sm text-gray-700">Define qué puede salir, qué se bloquea y qué se redirige por equipo, app o tipo de dato.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <span class="text-sm text-gray-700">Aplica cuotas y límites de costo por proveedor con alertas comprensibles.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-accent mt-0.5"></i>
+                            <span class="text-sm text-gray-700">Registra cada decisión para auditoría y cumplimiento.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Feature Grid -->
+                <div class="bg-white p-8 rounded-xl shadow-card border border-gray-100">
+                    <h3 class="text-lg font-bold text-primary mb-6 border-b border-gray-100 pb-4">Bloques clave</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="shield" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Policy Engine</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Controla qué puede salir, qué se bloquea y qué se redirige según reglas declarativas.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="pie-chart" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Usage & Cost Control</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Cuotas por equipo/app, límites por proveedor y alertas simples de consumo.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="shuffle" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Provider Abstraction</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Switch por reglas, fallback local y shadow mode para comparar respuestas.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i data-lucide="file-text" class="w-4 h-4 text-secondary"></i>
+                                <h4 class="font-bold text-dark text-sm">Audit Trail</h4>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Quién llamó, qué datos usó y qué decisión tomó el sistema quedan trazados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CÓMO FUNCIONA (DIAGRAMA) -->
+    <section id="como-funciona" class="py-24 bg-dark relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 text-white">
+                <h2 class="text-3xl font-bold mb-4">Cómo funciona</h2>
+                <p class="text-gray-400">Pipeline único para inspeccionar prompts, aplicar políticas, rutar proveedores y auditar respuestas.</p>
+            </div>
+
+            <!-- SVG Diagram -->
+            <div class="max-w-5xl mx-auto bg-white/5 rounded-xl border border-white/10 p-8 md:p-12">
+                <svg width="100%" viewBox="0 0 900 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+
+                    <g transform="translate(40, 80)">
+                        <rect width="150" height="80" rx="12" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+                        <text x="75" y="35" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Client App</text>
+                        <text x="75" y="55" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Chat / Automation</text>
+                    </g>
+
+                    <path d="M190 120 H 240" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white)" class="path-flow"/>
+
+                    <g transform="translate(240, 80)">
+                        <rect width="150" height="80" rx="12" fill="#022E5C" stroke="#4194BA" stroke-width="2"/>
+                        <text x="75" y="35" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Waliru Guard</text>
+                        <text x="75" y="55" fill="#cbd5f5" font-family="Inter" font-size="11" text-anchor="middle">Inspect + Policy</text>
+                    </g>
+
+                    <path d="M390 120 H 440" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white)" class="path-flow"/>
+
+                    <g transform="translate(440, 80)">
+                        <rect width="150" height="80" rx="12" fill="#0B2545" stroke="#7dd3fc" stroke-width="2"/>
+                        <text x="75" y="30" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Provider Router</text>
+                        <text x="75" y="50" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">OpenAI / Anthropic</text>
+                        <text x="75" y="66" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Gemini / Local</text>
+                    </g>
+
+                    <path d="M590 120 H 640" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white)" class="path-flow"/>
+
+                    <g transform="translate(640, 80)">
+                        <rect width="150" height="80" rx="12" fill="#1E293B" stroke="#EAB308" stroke-width="2"/>
+                        <text x="75" y="35" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Response Controls</text>
+                        <text x="75" y="55" fill="#f1f5f9" font-family="Inter" font-size="11" text-anchor="middle">Redact / Rate / Quotas</text>
+                    </g>
+
+                    <path d="M790 120 H 840" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white)" class="path-flow"/>
+
+                    <g transform="translate(810, 80)">
+                        <rect width="90" height="80" rx="12" fill="#0F172A" stroke="#38bdf8" stroke-width="2"/>
+                        <text x="45" y="35" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Audit Log</text>
+                        <text x="45" y="55" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Quién / Qué / Acción</text>
+                    </g>
+
+                    <text x="120" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Client App / Chat / Automation</text>
+                    <text x="315" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Waliru Guard (Inspect + Policy)</text>
+                    <text x="515" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Provider Router</text>
+                    <text x="715" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Response Controls</text>
+                    <text x="855" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Audit Log</text>
+                </svg>
+            </div>
+            <p class="text-center text-xs text-gray-400 mt-6 max-w-2xl mx-auto">Client App / Chat / Automation -> Waliru Guard -> Provider Router (OpenAI / Anthropic / Gemini / Local) -> Response Controls -> Audit Log.</p>
+        </div>
+    </section>
+
+    <!-- 6. CASOS DE USO -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Casos de uso más pedidos</h2>
+                <p class="text-gray-600 text-lg">Plantillas listas para los equipos que ya usan LLMs y necesitan políticas claras sin reescribir sus flujos.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4">
+                    <i data-lucide="message-square" class="w-6 h-6 text-accent"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-1">Chat corporativo</h3>
+                        <p class="text-sm text-gray-600">Políticas por equipo con límites de tokens y clasificación automática de sensibilidad.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4">
+                    <i data-lucide="layout-panel-top" class="w-6 h-6 text-accent"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-1">Plantillas guiadas</h3>
+                        <p class="text-sm text-gray-600">Prompts consistentes para ventas, CX o riesgo, con recomendaciones embebidas.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4">
+                    <i data-lucide="paperclip" class="w-6 h-6 text-accent"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-1">Adjuntos controlados</h3>
+                        <p class="text-sm text-gray-600">PDF, DOCX, XLSX, TXT o JSON con políticas de salida y saneamiento automático.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-accent"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-1">Evitar salida de PII</h3>
+                        <p class="text-sm text-gray-600">Redacta datos sensibles antes de enviarlos al proveedor y bloquea respuestas riesgosas.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4 md:col-span-2">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 text-accent"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-1">Prompts recomendados</h3>
+                        <p class="text-sm text-gray-600">Educa al equipo con ejemplos aprobados y shadow mode para enseñar mejores prácticas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. LO QUE BLOQUEA / REDIRIGE / PERMITE -->
+    <section class="py-20 bg-light border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Lo que bloquea, lo que redirige y lo que permite</h2>
+                <p class="text-gray-600 text-lg">Reglas claras para cada tipo de dato y proveedor.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded shadow-sm border-t-4 border-red-400">
+                    <h3 class="text-xl font-bold text-primary mb-4">Bloquea</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>PII, datos sensibles y secretos.</li>
+                        <li>Datos internos no permitidos.</li>
+                        <li>Adjuntos restringidos o no cifrados.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded shadow-sm border-t-4 border-yellow-400">
+                    <h3 class="text-xl font-bold text-primary mb-4">Redirige</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>Casos ambiguos hacia guard model local.</li>
+                        <li>Ruteo a proveedor alterno según reglas.</li>
+                        <li>Shadow mode para comparar respuestas.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded shadow-sm border-t-4 border-green-400">
+                    <h3 class="text-xl font-bold text-primary mb-4">Permite</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>Prompts dentro de política aprobada.</li>
+                        <li>Uso con cuotas, límites y auditoría.</li>
+                        <li>Respuestas monitoreadas con trazabilidad.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CTA FINAL -->
+    <section id="demo" class="bg-primary py-24 text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-white mb-6">Pon control donde hoy hay improvisación.</h2>
+            <p class="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
+                Activa políticas, cuotas y auditoría para LLMs en semanas, no meses.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20LLM%20Firewall" class="px-8 py-4 bg-white text-primary font-bold rounded shadow-lg hover:bg-gray-100 transition-colors">
+                    Hablar con Waliru
+                </a>
+                <a href="mailto:contacto@walirutech.com?subject=Demo%20Waliru%20LLM%20Firewall" class="px-8 py-4 bg-transparent border border-white/30 text-white font-bold rounded hover:bg-white/10 transition-colors">
+                    Solicitar demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER (Consistent) -->
+    <footer class="bg-dark pt-16 pb-8 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                <span>&copy; 2025 Waliru Tech</span>
+                <div class="flex gap-6">
+                    <a href="/es/index.html" class="hover:text-white">Home</a>
+                    <a href="#" class="hover:text-white">Privacidad</a>
+                    <a href="#" class="hover:text-white">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
