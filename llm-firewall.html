@@ -318,7 +318,7 @@
 
             <!-- SVG Diagram -->
             <div class="max-w-5xl mx-auto bg-white/5 rounded-xl border border-white/10 p-8 md:p-12">
-                <svg width="100%" viewBox="0 0 900 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="100%" viewBox="0 0 990 260" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                             <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
@@ -358,17 +358,17 @@
 
                     <path d="M790 120 H 840" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-white)" class="path-flow"/>
 
-                    <g transform="translate(810, 80)">
-                        <rect width="90" height="80" rx="12" fill="#0F172A" stroke="#38bdf8" stroke-width="2"/>
-                        <text x="45" y="35" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Audit Log</text>
-                        <text x="45" y="55" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Quién / Qué / Acción</text>
+                    <g transform="translate(840, 80)">
+                        <rect width="150" height="80" rx="12" fill="#0F172A" stroke="#38bdf8" stroke-width="2"/>
+                        <text x="75" y="35" fill="#FFFFFF" font-family="Inter" font-weight="bold" font-size="13" text-anchor="middle">Audit Log</text>
+                        <text x="75" y="55" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Quién / Qué / Acción</text>
                     </g>
 
                     <text x="120" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Client App / Chat / Automation</text>
                     <text x="315" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Waliru Guard (Inspect + Policy)</text>
                     <text x="515" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Provider Router</text>
                     <text x="715" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Response Controls</text>
-                    <text x="855" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Audit Log</text>
+                    <text x="915" y="200" fill="#94a3b8" font-family="Inter" font-size="11" text-anchor="middle">Audit Log</text>
                 </svg>
             </div>
             <p class="text-center text-xs text-gray-400 mt-6 max-w-2xl mx-auto">Client App / Chat / Automation -> Waliru Guard -> Provider Router (OpenAI / Anthropic / Gemini / Local) -> Response Controls -> Audit Log.</p>
@@ -394,21 +394,21 @@
                     <i data-lucide="layout-panel-top" class="w-6 h-6 text-accent"></i>
                     <div>
                         <h3 class="text-lg font-semibold text-primary mb-1">Plantillas guiadas</h3>
-                        <p class="text-sm text-gray-600">Prompts consistentes para ventas, CX o riesgo, con recomendaciones embebidas.</p>
+                        <p class="text-sm text-gray-600">Prompts consistentes para ventas, CX o riesgo, con recomendaciones embebidas. Ideal para correos e informes.</p>
                     </div>
                 </div>
                 <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4">
                     <i data-lucide="paperclip" class="w-6 h-6 text-accent"></i>
                     <div>
                         <h3 class="text-lg font-semibold text-primary mb-1">Adjuntos controlados</h3>
-                        <p class="text-sm text-gray-600">PDF, DOCX, XLSX, TXT o JSON con políticas de salida y saneamiento automático.</p>
+                        <p class="text-sm text-gray-600">PDF, DOCX, XLSX, TXT o JSON (borradores y documentos) con políticas de salida, escaneo y saneamiento automático.</p>
                     </div>
                 </div>
                 <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4">
                     <i data-lucide="shield-check" class="w-6 h-6 text-accent"></i>
                     <div>
-                        <h3 class="text-lg font-semibold text-primary mb-1">Evitar salida de PII</h3>
-                        <p class="text-sm text-gray-600">Redacta datos sensibles antes de enviarlos al proveedor y bloquea respuestas riesgosas.</p>
+                        <h3 class="text-lg font-semibold text-primary mb-1">Evitar fuga de datos personales</h3>
+                        <p class="text-sm text-gray-600">Detecta y redacta PII antes de enviar prompts o borradores (correos, informes, cartas) al proveedor. Bloquea respuestas riesgosas.</p>
                     </div>
                 </div>
                 <div class="p-6 bg-light rounded-lg border border-gray-100 flex gap-4 md:col-span-2">
