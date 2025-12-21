@@ -82,11 +82,13 @@
         .hero-pattern {
             background-color: #022E5C;
             background-image:
+                url('/assets/img/Fondo-hero2.png'),
                 radial-gradient(circle at 15% 50%, rgba(65, 148, 186, 0.08) 0%, transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(18, 78, 170, 0.1) 0%, transparent 20%),
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            background-size: cover, 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            background-position: center, center, center, center, center;
         }
 
         /* Mega Menu Logic */
@@ -125,10 +127,9 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div class="container mx-auto px-6 h-24 flex items-center justify-between">
             <!-- Logo Area -->
-            <a href="/index.html" class="flex items-center gap-2 group focus:outline-none"
-                aria-label="Waliru Tech Home">
-                <img src="/LogoWaliru-tech.svg" alt="Waliru Tech Logo" class="w-20 h-20" loading="eager"
-                    decoding="async">
+            <a class="flex items-center gap-2 group focus:outline-none" aria-label="Waliru Tech Home">
+                <img src="assets/img/5 LogoWaliruTechIsotipo.png" alt="Waliru Tech Logo" class="w-20 h-20"
+                    loading="eager" decoding="async">
                 <span
                     class="text-primary font-bold text-lg tracking-tight group-hover:text-secondary transition-colors">Waliru
                     Tech</span>
@@ -280,7 +281,6 @@
     <section class="relative hero-pattern text-white pt-24 pb-32 overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center space-y-8">
-                <!-- Badge -->
                 <div
                     class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
                     <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
@@ -290,14 +290,13 @@
 
                 <!-- Headline -->
                 <h1 class="text-4xl md:text-6xl font-bold leading-tight tracking-tight">
-                    Fábrica de software y soluciones <br class="hidden md:block" /> para 
+                    Tecnología y ejecución especializada <br class="hidden md:block" /> para
                     <span class="text-accent">escalar operaciones</span>.
                 </h1>
 
                 <!-- Subtitle -->
                 <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed">
-                    Entrega de software end-to-end con un equipo experto en Java, .NET, Go y Ruby.
-                    Desde el diseño de arquitectura hasta la operación continua.
+                    Diseñamos, construimos y operamos plataformas digitales con estándares enterprise, combinando low-code, ingeniería senior y analítica gobernada.
                 </p>
 
                 <!-- CTAs -->
@@ -315,7 +314,7 @@
         </div>
     </section>
 
-    <!-- 3. CAPABILITIES (Factory Focus) -->
+    <!-- 3. SOLUCIONES -->
     <section id="soluciones" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -377,9 +376,12 @@
                                 <i data-lucide="shield" class="w-6 h-6 text-accent"></i>
                                 <h3 class="text-2xl font-bold text-primary">Waliru LLM Firewall</h3>
                             </div>
-                            <p class="text-lg text-gray-500 font-medium mb-2">Capa de control para IA generativa empresarial</p>
+                            <p class="text-lg text-gray-500 font-medium mb-2">Capa de control para IA generativa
+                                empresarial</p>
                             <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                                Actúa como firewall entre tus aplicaciones internas y los proveedores de modelos: inspecciona cada intercambio, aplica políticas específicas y bloquea filtraciones de datos sensibles sin frenar la adopción de IA.
+                                Actúa como firewall entre tus aplicaciones internas y los proveedores de modelos:
+                                inspecciona cada intercambio, aplica políticas específicas y bloquea filtraciones de
+                                datos sensibles sin frenar la adopción de IA.
                             </p>
 
                             <div class="mb-8">
@@ -387,22 +389,30 @@
                                 <ul class="space-y-3 mt-3">
                                     <li class="flex items-start gap-2">
                                         <i data-lucide="check" class="w-4 h-4 text-accent mt-1"></i>
-                                        <span class="text-sm text-gray-700"><span class="font-semibold text-primary">Policy Engine:</span>
-                                            define qué datos cruzan el perímetro y aplica reglas específicas por equipo, aplicación o caso de uso.</span>
+                                        <span class="text-sm text-gray-700"><span
+                                                class="font-semibold text-primary">Policy Engine:</span>
+                                            define qué datos cruzan el perímetro y aplica reglas específicas por equipo,
+                                            aplicación o caso de uso.</span>
                                     </li>
                                     <li class="flex items-start gap-2">
                                         <i data-lucide="check" class="w-4 h-4 text-accent mt-1"></i>
-                                        <span class="text-sm text-gray-700"><span class="font-semibold text-primary">Usage &amp; Cost Control:</span>
-                                            establece cuotas por proveedor, monitorea consumo y alerta desviaciones para controlar el gasto.</span>
+                                        <span class="text-sm text-gray-700"><span
+                                                class="font-semibold text-primary">Usage &amp; Cost Control:</span>
+                                            establece cuotas por proveedor, monitorea consumo y alerta desviaciones para
+                                            controlar el gasto.</span>
                                     </li>
                                     <li class="flex items-start gap-2">
                                         <i data-lucide="check" class="w-4 h-4 text-accent mt-1"></i>
-                                        <span class="text-sm text-gray-700"><span class="font-semibold text-primary">Provider Abstraction &amp; Audit:</span>
-                                            enruta peticiones, habilita fallback a modelos locales y deja registro explicable de cada interacción.</span>
+                                        <span class="text-sm text-gray-700"><span
+                                                class="font-semibold text-primary">Provider Abstraction &amp;
+                                                Audit:</span>
+                                            enruta peticiones, habilita fallback a modelos locales y deja registro
+                                            explicable de cada interacción.</span>
                                     </li>
                                     <li class="flex items-start gap-2">
                                         <i data-lucide="check" class="w-4 h-4 text-accent mt-1"></i>
-                                        <span class="text-sm text-gray-700">Filtra chats corporativos y automatizaciones con adjuntos antes de enviarlos a un LLM.</span>
+                                        <span class="text-sm text-gray-700">Filtra chats corporativos y automatizaciones
+                                            con adjuntos antes de enviarlos a un LLM.</span>
                                     </li>
                                 </ul>
                             </div>
@@ -541,43 +551,208 @@
         </div>
     </section>
 
-    <section id="empresa" class="py-20 bg-white border-t border-gray-200">
+    <!-- NUEVA SECCIÓN: SERVICIOS DETALLADOS (Inserted as requested) -->
+    <section id="servicios-detallados" class="py-24 bg-white border-t border-b border-gray-100">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary mb-4" data-i18n="empresa.title">Somos un equipo senior, boutique y con ejecución flexible.</h2>
-                <p class="text-lg text-gray-600" data-i18n="empresa.subtitle">Diseñamos, construimos y operamos soluciones críticas con un núcleo de liderazgo técnico y una red de especialistas por proyecto.</p>
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                 <span class="text-accent font-semibold tracking-wider uppercase text-xs">Nuestros Servicios</span>
+                 <h2 class="text-3xl font-bold text-primary mt-2">Ingeniería + Aceleración</h2>
+                 <p class="text-gray-600 mt-4 text-lg">
+                    Combinamos ingeniería de software senior con aceleradores low-code para entregar valor más rápido sin comprometer la calidad.
+                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="bg-light border border-gray-100 rounded-xl p-6">
-                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.0.title">Liderazgo técnico real</h3>
-                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.0.body">Arquitectura, decisiones y calidad guiadas por experiencia. Sin delegar lo importante.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Software Engineering -->
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Software Engineering</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                        Squads plug-and-play para modernización de producto e integración con aceleradores.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Diseño de arquitectura</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Dev squads gestionados</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Quality Engineering / DevSecOps</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="bg-light border border-gray-100 rounded-xl p-6">
-                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.1.title">Red de especialistas</h3>
-                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.1.body">Sumamos talento por necesidad: UX, QA, DevOps, Data. Integrados con estándares y seguimiento.</p>
+
+                <!-- Card 2: Data & Analytics -->
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Data & Analytics</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                        Pipelines, ETLs y analítica avanzada para decisiones basadas en datos.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Modernización data stack</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Dashboards / BI</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Pilotos IA/LLM conectados</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="bg-light border border-gray-100 rounded-xl p-6">
-                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.2.title">Entrega con estándares</h3>
-                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.2.body">Definición clara de alcance, revisiones, seguridad básica y ownership extremo por resultado.</p>
+
+                <!-- Card 3: Security & Compliance -->
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Security & Compliance</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                        Hardening, gobierno de datos y cumplimiento normativo.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Seguridad en plataformas</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Data Governance</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span>Monitoreo y respuesta</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="bg-light border border-gray-100 rounded-xl p-8 mb-10">
-                <ul class="space-y-3 text-sm text-gray-700 list-disc list-inside" data-i18n-list="empresa.principles"></ul>
-            </div>
-
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-light border border-gray-100 rounded-xl p-6">
-                <p class="text-base text-gray-700" data-i18n="empresa.ctaText">¿Necesitas un partner técnico serio?</p>
-                <a href="#contacto" class="px-6 py-3 bg-primary text-white text-sm font-semibold rounded shadow-soft hover:bg-secondary transition-colors" data-i18n="empresa.ctaLabel">Agendar diagnóstico</a>
+            <!-- CTA Footer -->
+            <div class="mt-16 bg-light rounded-lg p-8 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h4 class="font-bold text-primary text-lg">¿Quieres acelerar uno de estos frentes?</h4>
+                    <p class="text-sm text-gray-600">Agenda una sesión técnica para revisar tu caso.</p>
+                </div>
+                <a href="#contacto" class="inline-flex items-center px-6 py-3 bg-white border border-gray-200 text-primary font-bold text-sm rounded hover:bg-gray-50 transition-colors shadow-sm">
+                    Solicitar asesoría técnica
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- 5. CLIENTES (Real) -->
+    <!-- 5. SERVICIOS -->
+    <section id="servicios" class="py-24 bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <span class="text-accent font-semibold tracking-wider uppercase text-xs" data-i18n="servicios.tag">Servicios Especializados</span>
+                <h2 class="text-3xl font-bold text-primary mt-3 mb-4" data-i18n="servicios.title">Software Engineering, Data & Analytics, Security & Compliance.</h2>
+                <p class="text-lg text-gray-600 leading-relaxed" data-i18n="servicios.subtitle">
+                    Operamos estos frentes crÃ­ticos con squads senior, aceleradores low-code y procesos auditables.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="code-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-i18n="servicios.cards.0.title">Software Engineering</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed" data-i18n="servicios.cards.0.body">
+                        Arquitectura y desarrollo con resiliencia, performance y DevSecOps integrado.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.0.items.0">Product squads plug-and-play</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.0.items.1">ModernizaciÃ³n low-code y full-code</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.0.items.2">Pipelines CI/CD con quality gates</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-i18n="servicios.cards.1.title">Data & Analytics</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed" data-i18n="servicios.cards.1.body">
+                        Plataformas de datos gobernadas, pipelines y analÃ­tica accionable para decisiones informadas.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.1.items.0">DiseÃ±o de lakehouse y data products</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.1.items.1">ETLs, integraciones y sincronizaciÃ³n</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.1.items.2">Analytics, BI y monitoreo operativo</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-i18n="servicios.cards.2.title">Security & Compliance</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed" data-i18n="servicios.cards.2.body">
+                        Gobierno de riesgos, estÃ¡ndares y monitoreo activo para plataformas reguladas.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.2.items.0">Assessments de seguridad y hardening</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.2.items.1">Controles continuos y logging centralizado</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.2.items.2">Soporte para auditorÃ­as y normativas</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-light rounded-xl p-8 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                <p class="text-base text-gray-700" data-i18n="servicios.ctaText">Â¿Necesitas acelerar uno de estos frentes?</p>
+                <a href="#contacto" class="inline-flex items-center px-6 py-3 bg-white border border-gray-200 text-primary font-bold text-sm rounded hover:bg-gray-50 transition-colors shadow-sm" data-i18n="servicios.ctaLabel">
+                    Coordinar revisión técnica
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CLIENTES (Real) -->
     <section id="clientes" class="py-20 bg-white border-y border-gray-100">
         <div class="container mx-auto px-6">
-            <h2 class="text-2xl font-bold text-primary mb-12 text-center">Clientes y Resultados</h2>
+            <h2 class="text-2xl font-bold text-primary mb-12 text-center">Resultados Reales</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Client 1 -->
@@ -664,7 +839,41 @@
         </div>
     </section>
 
-    <!-- 7. CTA FINAL & FOOTER -->
+    <!-- 7. SECCIÓN: EMPRESA -->
+    <section id="empresa" class="py-24 bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4" data-i18n="empresa.title">Somos un equipo senior, boutique y con ejecución flexible.</h2>
+                <p class="text-lg text-gray-600" data-i18n="empresa.subtitle">Diseñamos, construimos y operamos soluciones críticas con un núcleo de liderazgo técnico y una red de especialistas por proyecto.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-light border border-gray-100 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.0.title">Liderazgo técnico real</h3>
+                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.0.body">Arquitectura, decisiones y calidad guiadas por experiencia. Sin delegar lo importante.</p>
+                </div>
+                <div class="bg-light border border-gray-100 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.1.title">Red de especialistas</h3>
+                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.1.body">Sumamos talento por necesidad: UX, QA, DevOps, Data. Integrados con estándares y seguimiento.</p>
+                </div>
+                <div class="bg-light border border-gray-100 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.2.title">Entrega con estándares</h3>
+                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.2.body">Definición clara de alcance, revisiones, seguridad básica y ownership extremo por resultado.</p>
+                </div>
+            </div>
+
+            <div class="bg-light border border-gray-100 rounded-xl p-8 mb-10">
+                <ul class="space-y-3 text-sm text-gray-700 list-disc list-inside" data-i18n-list="empresa.principles"></ul>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-light border border-gray-100 rounded-xl p-6">
+                <p class="text-base text-gray-700" data-i18n="empresa.ctaText">¿Necesitas un partner técnico serio?</p>
+                <a href="#contacto" class="px-6 py-3 bg-primary text-white text-sm font-semibold rounded shadow-soft hover:bg-secondary transition-colors" data-i18n="empresa.ctaLabel">Agendar diagnóstico</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CTA FINAL & FOOTER -->
     <section id="contacto" class="bg-primary pt-24 pb-12 text-white">
         <div class="container mx-auto px-6 text-center mb-20">
             <h2 class="text-3xl font-bold mb-6">Inicie una conversación técnica</h2>
@@ -688,8 +897,8 @@
             <div>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12 text-sm">
                     <div class="col-span-2 md:col-span-1">
-                            <span class="font-bold text-xl tracking-tight">Waliru<span
-                            class="font-light text-teal-500">Tech</span></span>
+                        <span class="font-bold text-xl tracking-tight">Waliru<span
+                                class="font-light text-teal-500">Tech</span></span>
                         <p class="text-gray-400 mt-2 text-xs">Ingeniería de software corporativa.</p>
                     </div>
                     <div>
@@ -725,8 +934,8 @@
                 <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
                     <p class="text-xs text-gray-500">© 2025 Waliru Tech.</p>
                     <div class="flex justify-center gap-4 mt-3">
-                        <a href="https://www.linkedin.com/company/15255788/admin/dashboard/" class="text-gray-400 hover:text-white"><i data-lucide="linkedin"
-                                class="w-4 h-4"></i></a>
+                        <a href="https://www.linkedin.com/company/15255788/admin/dashboard/"
+                            class="text-gray-400 hover:text-white"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
                     </div>
                 </div>
             </div>

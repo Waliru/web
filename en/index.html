@@ -82,11 +82,13 @@
         .hero-pattern {
             background-color: #022E5C;
             background-image:
+                url('/assets/img/Fondo-hero2.png'),
                 radial-gradient(circle at 15% 50%, rgba(65, 148, 186, 0.08) 0%, transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(18, 78, 170, 0.1) 0%, transparent 20%),
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            background-size: cover, 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+            background-position: center, center, center, center, center;
         }
 
         /* Mega Menu Logic */
@@ -127,7 +129,7 @@
             <!-- Logo Area -->
             <a href="/en/index.html" class="flex items-center gap-2 group focus:outline-none"
                 aria-label="Waliru Tech Home">
-                <img src="/LogoWaliru-tech.svg" alt="Waliru Tech Logo" class="w-20 h-20" loading="eager"
+                <img src="../assets/img/5 LogoWaliruTechIsotipo.png" alt="Waliru Tech Logo" class="w-20 h-20" loading="eager"
                     decoding="async">
                 <span
                     class="text-primary font-bold text-lg tracking-tight group-hover:text-secondary transition-colors">Waliru
@@ -232,7 +234,7 @@
 
                 <!-- Language Switcher -->
                 <div class="border-l border-gray-300 pl-6 flex items-center gap-2 text-sm font-medium">
-                    <a href="/index.html" class="text-gray-400 hover:text-primary transition-colors"
+                    <a href="../index.html" class="text-gray-400 hover:text-primary transition-colors"
                         aria-label="Switch to Spanish">ES</a>
                     <span class="text-gray-300">|</span>
                     <span class="text-primary font-semibold" aria-current="true">EN</span>
@@ -290,14 +292,13 @@
 
                 <!-- Headline -->
                 <h1 class="text-4xl md:text-6xl font-bold leading-tight tracking-tight">
-                    Software factory and solutions <br class="hidden md:block" /> to <span
-                        class="text-accent">scale operations</span>.
+                    Specialized technology execution <br class="hidden md:block" /> to
+                    <span class="text-accent">scale mission-critical operations</span>.
                 </h1>
 
                 <!-- Subtitle -->
                 <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed">
-                    End-to-end software delivery with an expert team in Java, .NET, Go, and Ruby.
-                    From architectural design to continuous operation.
+                    We design, build, and run digital platforms with enterprise rigor, combining low-code accelerators, senior engineering, and governed analytics.
                 </p>
 
                 <!-- CTAs -->
@@ -550,25 +551,119 @@
         </div>
     </section>
 
-    <section id="empresa" class="py-20 bg-white border-t border-gray-200">
+    <!-- 5. SERVICES -->
+    <section id="servicios" class="py-24 bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <span class="text-accent font-semibold tracking-wider uppercase text-xs" data-i18n="servicios.tag">Specialized Services</span>
+                <h2 class="text-3xl font-bold text-primary mt-3 mb-4" data-i18n="servicios.title">Software Engineering, Data & Analytics, Security & Compliance.</h2>
+                <p class="text-lg text-gray-600 leading-relaxed" data-i18n="servicios.subtitle">
+                    We run these critical fronts with senior squads, low-code accelerators, and auditable processes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="code-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-i18n="servicios.cards.0.title">Software Engineering</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed" data-i18n="servicios.cards.0.body">
+                        Architecture and development focused on resilience, performance, and integrated DevSecOps.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.0.items.0">Plug-and-play product squads</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.0.items.1">Low-code and full-code modernization</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.0.items.2">CI/CD pipelines with quality gates</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-i18n="servicios.cards.1.title">Data & Analytics</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed" data-i18n="servicios.cards.1.body">
+                        Governed data platforms, pipelines, and actionable analytics for decision-making.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.1.items.0">Lakehouse and data product design</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.1.items.1">ETLs, integrations, and synchronization</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.1.items.2">Analytics, BI, and operational monitoring</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-8 bg-light rounded-xl border border-gray-100 hover:border-accent/30 transition-all group">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-primary group-hover:text-accent shadow-sm">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3" data-i18n="servicios.cards.2.title">Security & Compliance</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed" data-i18n="servicios.cards.2.body">
+                        Risk governance, standards alignment, and active monitoring for regulated platforms.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.2.items.0">Security assessments and hardening</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.2.items.1">Continuous controls with centralized logging</span>
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-gray-700">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-accent mt-0.5"></i>
+                            <span data-i18n="servicios.cards.2.items.2">Support for audits and regulatory needs</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-light rounded-xl p-8 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                <p class="text-base text-gray-700" data-i18n="servicios.ctaText">Need to accelerate one of these fronts?</p>
+                <a href="#contacto" class="inline-flex items-center px-6 py-3 bg-white border border-gray-200 text-primary font-bold text-sm rounded hover:bg-gray-50 transition-colors shadow-sm" data-i18n="servicios.ctaLabel">
+                    Schedule a technical review
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="empresa" class="py-24 bg-white border-t border-gray-200">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary mb-4" data-i18n="empresa.title">We are a senior, boutique team with flexible execution.</h2>
-                <p class="text-lg text-gray-600" data-i18n="empresa.subtitle">We design, build, and operate critical solutions with a core of technical leadership and a network of specialists per project.</p>
+                <h2 class="text-3xl font-bold text-primary mb-4" data-i18n="empresa.title">Senior, boutique team with flexible execution.</h2>
+                <p class="text-lg text-gray-600" data-i18n="empresa.subtitle">We design, build, and operate critical systems with a strong technical leadership core and an on-demand network of specialists.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <div class="bg-light border border-gray-100 rounded-xl p-6">
                     <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.0.title">Real technical leadership</h3>
-                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.0.body">Architecture, decisions, and quality guided by experience. Without delegating what's important.</p>
+                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.0.body">Architecture, decisions, and quality led by experience. No outsourcing what matters.</p>
                 </div>
                 <div class="bg-light border border-gray-100 rounded-xl p-6">
-                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.1.title">Network of specialists</h3>
-                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.1.body">We add talent as needed: UX, QA, DevOps, Data. Integrated with standards and monitoring.</p>
+                    <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.1.title">Specialist network</h3>
+                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.1.body">We add the right talent when needed: UX, QA, DevOps, Data—aligned through shared standards.</p>
                 </div>
                 <div class="bg-light border border-gray-100 rounded-xl p-6">
                     <h3 class="text-xl font-semibold text-primary mb-3" data-i18n="empresa.cards.2.title">Delivery with standards</h3>
-                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.2.body">Clear scope definition, reviews, basic security, and extreme ownership for results.</p>
+                    <p class="text-sm text-gray-600" data-i18n="empresa.cards.2.body">Clear scope, reviews, baseline security, and full ownership of outcomes.</p>
                 </div>
             </div>
 
@@ -578,7 +673,7 @@
 
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-light border border-gray-100 rounded-xl p-6">
                 <p class="text-base text-gray-700" data-i18n="empresa.ctaText">Need a serious technical partner?</p>
-                <a href="#contacto" class="px-6 py-3 bg-primary text-white text-sm font-semibold rounded shadow-soft hover:bg-secondary transition-colors" data-i18n="empresa.ctaLabel">Schedule diagnostic</a>
+                <a href="#contacto" class="px-6 py-3 bg-primary text-white text-sm font-semibold rounded shadow-soft hover:bg-secondary transition-colors" data-i18n="empresa.ctaLabel">Book a diagnostic call</a>
             </div>
         </div>
     </section>

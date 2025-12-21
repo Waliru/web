@@ -25,5 +25,41 @@
     ],
     "ctaText": "¿Necesitas un partner técnico serio?",
     "ctaLabel": "Agendar diagnóstico"
+  },
+  "servicios": {
+    "tag": "Servicios Especializados",
+    "title": "Software Engineering, Data & Analytics, Security & Compliance.",
+    "subtitle": "Operamos estos frentes críticos con squads senior, aceleradores low-code y procesos auditables.",
+    "cards": [
+      {
+        "title": "Software Engineering",
+        "body": "Arquitectura y desarrollo con resiliencia, performance y DevSecOps integrado.",
+        "items": [
+          "Product squads plug-and-play",
+          "Modernización low-code y full-code",
+          "Pipelines CI/CD con quality gates"
+        ]
+      },
+      {
+        "title": "Data & Analytics",
+        "body": "Plataformas de datos gobernadas, pipelines y analítica accionable para decisiones informadas.",
+        "items": [
+          "Diseño de lakehouse y data products",
+          "ETLs, integraciones y sincronización",
+          "Analytics, BI y monitoreo operativo"
+        ]
+      },
+      {
+        "title": "Security & Compliance",
+        "body": "Gobierno de riesgos, estándares y monitoreo activo para plataformas reguladas.",
+        "items": [
+          "Assessments de seguridad y hardening",
+          "Controles continuos y logging centralizado",
+          "Soporte para auditorías y normativas"
+        ]
+      }
+    ],
+    "ctaText": "¿Necesitas acelerar uno de estos frentes?",
+    "ctaLabel": "Coordinar revisión técnica"
   }
 }
